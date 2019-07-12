@@ -11,10 +11,17 @@ class AddProjectTask extends Component {
     this.state = {
       summary: "",
       acceptanceCriteria: "",
-      status: ""
+      status: "",
+      errors: {}
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps){
+    if (nextProps.errors) {
+      this.setState({ errors:nextProps.errors });
+    }
   }
 
   onChange(e){
@@ -32,6 +39,10 @@ class AddProjectTask extends Component {
   }
 
   render(){
+    const {errors} = this.state;
+    // let errorFlag = (Object.entries(errors).length === 0) ? "" : "alert alert-danger";
+    // console.log(errors);
+    // console.log(errorFlag);
     return (
       <div className="addProjectTask">
           <div className="container">
@@ -43,7 +54,20 @@ class AddProjectTask extends Component {
                       <h4 className="display-4 text-center">Add /Update Project Task</h4>
                       <form onSubmit={ this.onSubmit }>
                           <div className="form-group">
-                              <input type="text" className="form-control form-control-lg" name="summary" value={ this.state.summary } placeholder="Project Task summary" onChange={ this.onChange }/>
+                              <input
+                                type="text"
+                                className={classnames("form-control form-control-lg", {
+                                  "is-invalid": errors.summary
+                                })}
+                                name="summary"
+                                value={ this.state.summary }
+                                placeholder="Project Task summary"
+                                onChange={ this.onChange }/>
+                              {
+                                errors.summary && (
+                                  <div className = "invalid-feedback">{errors.summary}</div>
+                                )
+                              }
                           </div>
                           <div className="form-group">
                               <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" name="acceptanceCriteria" value={ this.state.acceptanceCriteria } onChange={ this.onChange }></textarea>
