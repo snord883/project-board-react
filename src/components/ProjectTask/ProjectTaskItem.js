@@ -13,7 +13,7 @@ class ProjectTaskItem extends Component {
                 <p className="card-text text-truncate ">
                     acceptanceCriteria
                 </p>
-                <a href="#" className="btn btn-primary">
+                <a href="espn.com" className="btn btn-primary">
                     View / Update
                 </a>
 
