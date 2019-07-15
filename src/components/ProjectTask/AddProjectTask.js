@@ -40,9 +40,6 @@ class AddProjectTask extends Component {
 
   render(){
     const {errors} = this.state;
-    // let errorFlag = (Object.entries(errors).length === 0) ? "" : "alert alert-danger";
-    // console.log(errors);
-    // console.log(errorFlag);
     return (
       <div className="addProjectTask">
           <div className="container">
